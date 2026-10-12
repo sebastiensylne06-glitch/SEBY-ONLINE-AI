@@ -9,9 +9,7 @@
 /* ===================== API CONFIG ===================== */
 
 // Pou Termux sou menm telefòn lan:
-const API_URL =
-    window.SEBY_AI_API_URL ||
-    "http://127.0.0.1:3001/api/chat";
+const API_URL = "https://seby-online-ai-2.onrender.com/api/chat";
 
 // Si backend lan sou Render, ranplase URL ki anlè a
 // ak URL HTTPS sèvis Render ou a + /api/chat.
