@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#080a16">
+
+    <title>SEBY AI Premium</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="brand-small">
+
+                <div class="logo-box small-logo">
+                    <svg viewBox="0 0 100 100">
+                        <path d="M50 16
+                                 C39 10 27 18 29 30
+                                 C18 30 14 43 22 51
+                                 C14 61 21 74 32 73
+                                 C35 87 48 91 50 80
+                                 C52 91 65 87 68 73
+                                 C79 74 86 61 78 51
+                                 C86 43 82 30 71 30
+                                 C73 18 61 10 50 16Z"
+                              fill="white"/>
+                        <path d="M50 18V82M38 25C43 31 44 38 44 45M62 25C57 31 56 38 56 45M32 40C38 42 41 46 44 51M68 40C62 42 59 46 56 51M33 61C38 58 42 58 46 62M67 61C62 58 58 58 54 62"
+                              stroke="#6655F5"
+                              stroke-width="4"
+                              fill="none"
+                              stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <strong>SEBY AI</strong>
+                    <span>Premium Assistant</span>
+                </div>
+
+            </div>
+
+            <button
+                class="close-sidebar"
+                id="closeSidebar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <button
+            class="new-chat"
+            id="newChat"
+        >
+            <span>＋</span>
+            Nouvelle discussion
+        </button>
+
+
+        <nav class="menu">
+
+            <button
+                class="menu-item active"
+                data-page="chat"
+            >
+                <span>⌂</span>
+                Assistant
+            </button>
+
+            <button
+                class="menu-item"
+                data-page="saved"
+            >
+                <span>☆</span>
+                Enregistrés
+            </button>
+
+            <button
+                class="menu-item"
+                data-page="settings"
+            >
+                <span>⚙</span>
+                Paramètres
+            </button>
+
+            <button
+                class="menu-item"
+                data-page="about"
+            >
+                <span>ⓘ</span>
+                À propos
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-user">
+
+            <div class="avatar">
+                S
+            </div>
+
+            <div>
+                <strong id="sidebarName">
+                    Seby
+                </strong>
+
+                <span>
+                    Compte Premium
+                </span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <button
+                class="header-button menu-button"
+                id="openSidebar"
+            >
+                ☰
+            </button>
+
+
+            <div class="header-brand">
+
+                <div class="logo-box header-logo">
+
+                    <svg viewBox="0 0 100 100">
+                        <path d="M50 16
+                                 C39 10 27 18 29 30
+                                 C18 30 14 43 22 51
+                                 C14 61 21 74 32 73
+                                 C35 87 48 91 50 80
+                                 C52 91 65 87 68 73
+                                 C79 74 86 61 78 51
+                                 C86 43 82 30 71 30
+                                 C73 18 61 10 50 16Z"
+                              fill="white"/>
+                        <path d="M50 18V82M38 25C43 31 44 38 44 45M62 25C57 31 56 38 56 45M32 40C38 42 41 46 44 51M68 40C62 42 59 46 56 51M33 61C38 58 42 58 46 62M67 61C62 58 58 58 54 62"
+                              stroke="#6655F5"
+                              stroke-width="4"
+                              fill="none"
+                              stroke-linecap="round"/>
+                    </svg>
+
+                </div>
+
+
+                <div class="header-title">
+
+                    <strong>
+                        SEBY AI
+                    </strong>
+
+                    <span>
+                        <i></i>
+                        Online
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    class="notification"
+                    id="notification"
+                >
+                    🔔
+                    <b>1</b>
+                </button>
+
+
+                <button
+                    class="profile"
+                    id="profile"
+                >
+                    S
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             CHAT PAGE
+        ========================== -->
+
+        <section
+            class="page chat-page active"
+            id="chatPage"
+        >
+
+            <div
+                class="chat-area"
+                id="chatArea"
+            >
+
+                <!-- WELCOME -->
+
+                <div
+                    class="welcome"
+                    id="welcome"
+                >
+
+                    <div class="hero-logo">
+
+                        <div class="logo-box">
+
+                            <svg viewBox="0 0 100 100">
+
+                                <path d="M50 16
+                                         C39 10 27 18 29 30
+                                         C18 30 14 43 22 51
+                                         C14 61 21 74 32 73
+                                         C35 87 48 91 50 80
+                                         C52 91 65 87 68 73
+                                         C79 74 86 61 78 51
+                                         C86 43 82 30 71 30
+                                         C73 18 61 10 50 16Z"
+                                      fill="white"/>
+
+                                <path d="M50 18V82
+                                         M38 25C43 31 44 38 44 45
+                                         M62 25C57 31 56 38 56 45
+                                         M32 40C38 42 41 46 44 51
+                                         M68 40C62 42 59 46 56 51
+                                         M33 61C38 58 42 58 46 62
+                                         M67 61C62 58 58 58 54 62"
+                                      stroke="#6655F5"
+                                      stroke-width="4"
+                                      fill="none"
+                                      stroke-linecap="round"/>
+
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+
+                    <h1>
+                        Bonjour / Bonsoir
+                        <span>👋</span>
+                    </h1>
+
+
+                    <p>
+
+                        Je suis
+                        <strong>SEBY AI</strong>,
+                        un assistant intelligent qui est là pour vous aider
+                        avec vos questions, création de contenus, Programmation,
+                        traduction, image AI, video AI,
+                        marketing digital et autres services demandés.
+
+                    </p>
+
+
+                    <div class="quick-buttons">
+
+                        <button
+                            class="quick-button"
+                            data-question="aide moi à créer un texte"
+                        >
+
+                            <span>✎</span>
+
+                            Créer un texte
+
+                        </button>
+
+
+                        <button
+                            class="quick-button"
+                            data-question="Traduis un texte pour moi."
+                        >
+
+                            <span>文</span>
+
+                            Traduis un texte
+
+                        </button>
+
+
+                        <button
+                            class="quick-button"
+                            data-question="donne moi une idée créative pour un projet."
+                        >
+
+                            <span>♢</span>
+
+                            Donne moi une idée
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGES -->
+
+                <div
+                    class="messages"
+                    id="messages"
+                ></div>
+
+            </div>
+
+
+            <!-- =========================
+                 COMPOSER
+            ========================== -->
+
+            <div class="composer-container">
+
+                <div class="composer">
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        accept="image/*"
+                        hidden
+                    >
+
+
+                    <button
+                        class="composer-icon"
+                        id="attachButton"
+                        title="Ajoute imaj"
+                    >
+                        📎
+                    </button>
+
+
+                    <div class="input-container">
+
+                        <div
+                            class="image-preview"
+                            id="imagePreview"
+                        ></div>
+
+
+                        <textarea
+                            id="messageInput"
+                            rows="1"
+                            placeholder="Poze kesyon ou..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        class="composer-icon microphone"
+                        id="microphone"
+                        title="Pale"
+                    >
+                        🎙
+                    </button>
+
+
+                    <button
+                        class="send-button"
+                        id="sendButton"
+                    >
+                        ➤
+                    </button>
+
+                </div>
+
+
+                <div class="composer-note">
+                    SEBY AI peut faire des erreurs , vériffiez vos informations importants.
+                
+                  PAYPAL pour sponsor : sebastiensylne06@gmail.com
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SAVED PAGE
+        ========================== -->
+
+        <section
+            class="page other-page"
+            id="savedPage"
+        >
+
+            <div class="page-heading">
+
+                <div class="page-icon">
+                    ☆
+                </div>
+
+                <div>
+                    <h2>
+                        Enregistrés
+                    </h2>
+
+                    <p>
+                        Messages favoris.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                class="saved-list"
+                id="savedList"
+            ></div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section
+            class="page other-page"
+            id="settingsPage"
+        >
+
+            <div class="page-heading">
+
+                <div class="page-icon">
+                    ⚙
+                </div>
+
+                <div>
+                    <h2>
+                        Paramètres
+                    </h2>
+
+                    <p>
+                       Controlez votre expérience avec SEBY AI.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="setting">
+
+                <div>
+                    <strong>
+                        Nom
+                    </strong>
+
+                    <small>
+                        Votre nom dans SEBY AI.
+                    </small>
+                </div>
+
+                <input
+                    id="nameInput"
+                    type="text"
+                    maxlength="30"
+                    placeholder="Seby"
+                >
+
+            </div>
+
+
+            <div class="setting">
+
+                <div>
+                    <strong>
+                        Lire les réponses 
+                    </strong>
+
+                    <small>
+                        SEBY AI peut lire à haute voîx les réponses.
+                    </small>
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="voiceToggle"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <button
+                class="delete-button"
+                id="clearHistory"
+            >
+                Supprimé les Histoires locals
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             ABOUT
+        ========================== -->
+
+        <section
+            class="page other-page"
+            id="aboutPage"
+        >
+
+            <div class="about">
+
+                <div class="about-logo">
+
+                    <div class="logo-box">
+
+                        <svg viewBox="0 0 100 100">
+
+                            <path d="M50 16
+                                     C39 10 27 18 29 30
+                                     C18 30 14 43 22 51
+                                     C14 61 21 74 32 73
+                                     C35 87 48 91 50 80
+                                     C52 91 65 87 68 73
+                                     C79 74 86 61 78 51
+                                     C86 43 82 30 71 30
+                                     C73 18 61 10 50 16Z"
+                                  fill="white"/>
+
+                            <path d="M50 18V82
+                                     M38 25C43 31 44 38 44 45
+                                     M62 25C57 31 56 38 56 45
+                                     M32 40C38 42 41 46 44 51
+                                     M68 40C62 42 59 46 56 51
+                                     M33 61C38 58 42 58 46 62
+                                     M67 61C62 58 58 58 54 62"
+                                  stroke="#6655F5"
+                                  stroke-width="4"
+                                  fill="none"
+                                  stroke-linecap="round"/>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <h2>
+                    SEBY AI
+                </h2>
+
+                <p>
+                    Asistan entelijan pwojè SEBY AI.
+                </p>
+
+                <span class="version">
+                    SEBY AI Premium • v1.0
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- PROFILE POPUP -->
+
+<div
+    class="profile-popup"
+    id="profilePopup"
+>
+
+    <div class="profile-info">
+
+        <div class="profile-big">
+            S
+        </div>
+
+        <div>
+
+            <strong id="profileName">
+                Seby
+            </strong>
+
+            <small>
+                Premium
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <button id="profileSettings">
+        ⚙ Paramètres
+    </button>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

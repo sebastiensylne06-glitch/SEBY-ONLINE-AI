@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="theme-color"
+        content="#080914">
+
+    <title>SEBY AI Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css">
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN ADMIN
+========================= -->
+
+<section
+    id="login"
+    class="login">
+
+    <div class="login-card">
+
+        <div class="logo">
+            ✦
+        </div>
+
+        <h1>
+            SEBY AI
+            <span>ADMIN</span>
+        </h1>
+
+        <p>
+            Espace d'administration
+        </p>
+
+        <form id="loginForm">
+
+            <label>
+                E-mail
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                required
+                placeholder="admin@sebyai.com">
+
+            <label>
+                Mot de passe
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                required
+                placeholder="••••••••">
+
+            <button
+                class="primary">
+                Se connecter
+            </button>
+
+            <small id="error"></small>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ADMIN APP
+========================= -->
+
+<div
+    id="app"
+    class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside id="side">
+
+        <div class="brand">
+
+            <div class="logo sm">
+                ✦
+            </div>
+
+            <b>
+                SEBY AI
+            </b>
+
+            <small>
+                ADMIN PANEL
+            </small>
+
+            <button id="close">
+                ×
+            </button>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav active"
+                data-page="dashboard">
+
+                ▦ Dashboard
+
+            </button>
+
+
+            <button
+                class="nav"
+                data-page="users">
+
+                ♙ Utilisateurs
+
+            </button>
+
+
+            <button
+                class="nav"
+                data-page="chats">
+
+                ◫ Conversations
+
+            </button>
+
+
+            <button
+                class="nav"
+                data-page="ai">
+
+                ✦ SEBY AI
+
+            </button>
+
+
+            <button
+                class="nav"
+                data-page="notify">
+
+                ♢ Notifications
+
+            </button>
+
+
+            <button
+                class="nav"
+                data-page="settings">
+
+                ⚙ Paramètres
+
+            </button>
+
+        </nav>
+
+
+        <div class="bottom">
+
+            <div class="admin">
+
+                <div class="avatar">
+                    S
+                </div>
+
+                <span id="adminName">
+                    Administrateur
+                </span>
+
+            </div>
+
+
+            <button id="logout">
+                ↪ Déconnexion
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <div id="overlay"></div>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <header>
+
+            <button id="menu">
+                ☰
+            </button>
+
+
+            <div>
+
+                <h2 id="title">
+                    Dashboard
+                </h2>
+
+                <small id="subtitle">
+                    Vue générale de SEBY AI
+                </small>
+
+            </div>
+
+
+            <button id="refresh">
+                ↻
+            </button>
+
+        </header>
+
+
+        <div class="content">
+
+
+            <!-- =========================
+                 DASHBOARD
+            ========================= -->
+
+            <section
+                class="page active"
+                id="dashboard">
+
+                <div class="online">
+
+                    <i></i>
+
+                    <div>
+
+                        <b>
+                            SEBY AI Online
+                        </b>
+
+                        <small>
+                            Panneau d'administration actif
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="card">
+
+                        <span>
+                            Utilisateurs
+                        </span>
+
+                        <strong id="usersCount">
+                            0
+                        </strong>
+
+                        <small>
+                            comptes
+                        </small>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <span>
+                            Messages
+                        </span>
+
+                        <strong id="msgCount">
+                            0
+                        </strong>
+
+                        <small>
+                            messages locaux
+                        </small>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <span>
+                            API
+                        </span>
+
+                        <strong id="apiState">
+                            Demo
+                        </strong>
+
+                        <small>
+                            backend à connecter
+                        </small>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <span>
+                            Session
+                        </span>
+
+                        <strong>
+                            1
+                        </strong>
+
+                        <small>
+                            admin
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cols">
+
+                    <div class="panel">
+
+                        <h3>
+                            Activité récente
+                        </h3>
+
+                        <div id="activity"></div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>
+                            État du système
+                        </h3>
+
+                        <div class="system">
+
+                            <p>
+                                Frontend
+                                <b class="ok">
+                                    Opérationnel
+                                </b>
+                            </p>
+
+                            <p>
+                                Stockage
+                                <b class="ok">
+                                    Opérationnel
+                                </b>
+                            </p>
+
+                            <p>
+                                Backend
+                                <b class="warn">
+                                    À connecter
+                                </b>
+                            </p>
+
+                            <p>
+                                OpenAI
+                                <b class="warn">
+                                    Backend requis
+                                </b>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 USERS
+            ========================= -->
+
+            <section
+                class="page"
+                id="users">
+
+                <div class="tools">
+
+                    <div>
+
+                        <h3>
+                            Utilisateurs
+                        </h3>
+
+                        <p>
+                            Gestion locale des utilisateurs.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="addUser"
+                        class="primary smallbtn">
+
+                        + Ajouter
+
+                    </button>
+
+                </div>
+
+
+                <input
+                    id="search"
+                    class="search"
+                    placeholder="Rechercher...">
+
+
+                <div class="panel tablebox">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Nom
+                                </th>
+
+                                <th>
+                                    E-mail
+                                </th>
+
+                                <th>
+                                    Statut
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="usersTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 CONVERSATIONS
+            ========================= -->
+
+            <section
+                class="page"
+                id="chats">
+
+                <div class="tools">
+
+                    <div>
+
+                        <h3>
+                            Conversations
+                        </h3>
+
+                        <p>
+                            Historique trouvé sur cet appareil.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="clearChats"
+                        class="danger">
+
+                        Effacer
+
+                    </button>
+
+                </div>
+
+
+                <div id="chatList"></div>
+
+            </section>
+
+
+            <!-- =========================
+                 AI
+            ========================= -->
+
+            <section
+                class="page"
+                id="ai">
+
+                <div class="tools">
+
+                    <div>
+
+                        <h3>
+                            SEBY AI
+                        </h3>
+
+                        <p>
+                            Configuration de l'assistant.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cols">
+
+                    <div class="panel">
+
+                        <h3>
+                            Mode
+                        </h3>
+
+
+                        <label class="switch">
+
+                            Assistant activé
+
+                            <input
+                                id="aiEnabled"
+                                type="checkbox"
+                                checked>
+
+                        </label>
+
+
+                        <label class="switch">
+
+                            Réponses vocales
+
+                            <input
+                                id="voice"
+                                type="checkbox">
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>
+                            API
+                        </h3>
+
+                        <p class="muted">
+                            API URL
+                        </p>
+
+                        <code id="apiUrl">
+                            Non configurée
+                        </code>
+
+
+                        <div class="warning">
+
+                            Ne placez jamais une clé OpenAI
+                            secrète dans HTML, CSS ou JavaScript
+                            frontend.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 NOTIFICATIONS
+            ========================= -->
+
+            <section
+                class="page"
+                id="notify">
+
+                <div class="tools">
+
+                    <div>
+
+                        <h3>
+                            Notifications
+                        </h3>
+
+                        <p>
+                            Préparer un message utilisateur.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel form">
+
+                    <label>
+                        Titre
+                    </label>
+
+                    <input
+                        id="ntitle"
+                        placeholder="Maintenance">
+
+
+                    <label>
+                        Message
+                    </label>
+
+                    <textarea
+                        id="nmsg"
+                        rows="5"
+                        placeholder="Votre message..."></textarea>
+
+
+                    <button
+                        id="saveNotify"
+                        class="primary">
+
+                        Publier localement
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="preview"
+                    class="panel hidden">
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 SETTINGS
+            ========================= -->
+
+            <section
+                class="page"
+                id="settings">
+
+                <div class="tools">
+
+                    <div>
+
+                        <h3>
+                            Paramètres
+                        </h3>
+
+                        <p>
+                            Configuration de l'interface.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel form">
+
+                    <label>
+                        Nom admin
+                    </label>
+
+                    <input
+                        id="nameInput"
+                        value="Administrateur">
+
+
+                    <button
+                        id="saveName"
+                        class="primary">
+
+                        Enregistrer
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    id="modal"
+    class="modal hidden">
+
+    <div class="modal-card">
+
+        <button id="modalClose">
+            ×
+        </button>
+
+        <h3>
+            Ajouter un utilisateur
+        </h3>
+
+
+        <form id="userForm">
+
+            <label>
+                Nom
+            </label>
+
+            <input
+                id="newName"
+                required>
+
+
+            <label>
+                E-mail
+            </label>
+
+            <input
+                id="newEmail"
+                type="email"
+                required>
+
+
+            <button
+                class="primary">
+
+                Ajouter
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>
