@@ -1,0 +1,95 @@
+
+name: Build SEBY AI Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate web app files
+        run: |
+          test -f index.html || (echo "ERROR: index.html is missing" && exit 1)
+
+      - name: Prepare SEBY AI web files
+        run: |
+          mkdir -p www
+          cp index.html www/
+          [ ! -f style.css ] || cp style.css www/
+          [ ! -f script.js ] || cp script.js www/
+          [ ! -f admin.html ] || cp admin.html www/
+          [ ! -f admin.css ] || cp admin.css www/
+          [ ! -f admin.js ] || cp admin.js www/
+          [ ! -d assets ] || cp -R assets www/
+          [ ! -d images ] || cp -R images www/
+
+          cat > package.json <<'PACKAGE'
+          {
+            "name": "seby-ai-android",
+            "version": "1.0.0",
+            "private": true,
+            "dependencies": {
+              "@capacitor/android": "^7.4.3",
+              "@capacitor/core": "^7.4.3"
+            },
+            "devDependencies": {
+              "@capacitor/cli": "^7.4.3"
+            }
+          }
+          PACKAGE
+
+          cat > capacitor.config.json <<'CONFIG'
+          {
+            "appId": "com.sebyai.app",
+            "appName": "SEBY AI",
+            "webDir": "www"
+          }
+          CONFIG
+
+          npm install
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Sync web files
+        run: npx cap sync android
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: seby-ai-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
